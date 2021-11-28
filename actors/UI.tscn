@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scripts/RichTextLabel_TEST.gd" type="Script" id=1]
+[ext_resource path="res://scripts/UI.gd" type="Script" id=2]
+[ext_resource path="res://assets/cursor.png" type="Texture" id=3]
+
+[node name="UI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TestLabel" type="Label" parent="."]
+anchor_left = 0.023
+anchor_top = 0.042
+anchor_right = 0.182
+anchor_bottom = 0.173
+margin_left = 0.447998
+margin_top = -0.200003
+margin_right = -14.368
+margin_bottom = -8.8
+text = "TEST
+"
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GunPoint" type="Sprite" parent="."]
+visible = false
+position = Vector2( 184, 155 )
+texture = ExtResource( 3 )
