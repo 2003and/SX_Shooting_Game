@@ -19,5 +19,5 @@ func test_text(arg) -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	gp.position = VP.get_mouse_position()
-	gp.position.x -= 1
+	#gp.position = player.position
 

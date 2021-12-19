@@ -11,6 +11,7 @@ extents = Vector2( 4, 5 )
 extents = Vector2( 7, 6 )
 
 [node name="Player" type="KinematicBody2D"]
+position = Vector2( 0, -9 )
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -27,4 +28,7 @@ disabled = true
 one_way_collision_margin = 0.0
 
 [node name="Gun" parent="." instance=ExtResource( 3 )]
-position = Vector2( 12, 2 )
+
+[node name="DebugVelLine" type="Line2D" parent="."]
+points = PoolVector2Array( 0, 0, 0, 0 )
+default_color = Color( 1, 0, 0, 1 )

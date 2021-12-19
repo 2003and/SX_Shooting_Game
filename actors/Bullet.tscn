@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://scripts/Bullet.gd" type="Script" id=1]
+[ext_resource path="res://assets/gun_bullet_particle.png" type="Texture" id=2]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.0621762, 0.990909 ), 0.0, 0.0, 0, 0, Vector2( 0.26943, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0, 0.260274, 1 )
+colors = PoolColorArray( 1, 0.938782, 0.539062, 1, 1, 0.98197, 0.864244, 0.294521, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+
+[sub_resource type="ParticlesMaterial" id=4]
+lifetime_randomness = 0.11
+flag_disable_z = true
+spread = 17.6
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 65.22
+initial_velocity_random = 0.21
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = -65.22
+angle = 62.6
+angle_random = 1.0
+color_ramp = SubResource( 3 )
+
+[node name="Bullet" type="RayCast2D"]
+enabled = true
+cast_to = Vector2( 120, 0 )
+script = ExtResource( 1 )
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PoolVector2Array( 0, 0, 13, 0, 128, 0 )
+width = 2.0
+width_curve = SubResource( 1 )
+default_color = Color( 1, 0.858824, 0.588235, 1 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Particles2D" type="Particles2D" parent="."]
+emitting = false
+amount = 3
+lifetime = 0.05
+one_shot = true
+explosiveness = 0.4
+visibility_rect = Rect2( -10, -10, 20, 20 )
+process_material = SubResource( 4 )
+texture = ExtResource( 2 )
