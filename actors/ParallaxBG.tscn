@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/донбас.jpg" type="Texture" id=1]
+[ext_resource path="res://scripts/ParallaxBG.gd" type="Script" id=2]
+
+[node name="BG_TEST" type="Position2D"]
+script = ExtResource( 2 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = -451.0
+margin_top = -447.0
+margin_right = 438.0
+margin_bottom = 442.0
+texture = ExtResource( 1 )
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}

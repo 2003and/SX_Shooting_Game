@@ -1,5 +1,7 @@
 extends RayCast2D
 var Rnd = RandomNumberGenerator.new()
+signal hit_something(object,damage)
+
 
 func _ready() -> void:
 	Rnd.randomize()
@@ -9,7 +11,6 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	var cast_point := cast_to
 	force_raycast_update()
-	
 	
 	if is_colliding():
 		cast_point = to_local(get_collision_point())
@@ -22,4 +23,7 @@ func shoot() -> void:
 	$Tween.stop_all()
 	$Tween.interpolate_property($Line2D, "width", 3.0, 0, 0.05)
 	$Tween.start()
+	if is_colliding():
+		print(get_collider())
+		emit_signal("hit_something", get_collider(),4)
 	

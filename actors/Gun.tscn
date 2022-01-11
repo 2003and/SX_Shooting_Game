@@ -70,3 +70,5 @@ speed_scale = 1.96
 explosiveness = 0.72
 process_material = SubResource( 5 )
 texture = ExtResource( 7 )
+[connection signal="hit_something" from="Laser" to="." method="_on_Laser_hit_something"]
+[connection signal="hit_something" from="Bullet" to="." method="_on_Bullet_hit_something"]

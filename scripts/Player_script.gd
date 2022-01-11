@@ -1,6 +1,9 @@
 extends KinematicBody2D
 
+signal bullet_hit_something(object, damage)
+
 onready var consts = get_node("../ConstManager")
+onready var UI = get_node("../Camera2D/UI")
 
 onready var speed = consts.speed
 onready var jumpPower = consts.jumpPower
@@ -9,8 +12,16 @@ onready var frict = consts.frict
 onready var m_vel = consts.vel_max
 onready var g_spr
 onready var spr = get_node("Sprite")
+
 var vel: Vector2 = Vector2() setget add_impulse
 var impulse_cooldown = 0
+var score = 0
+var speed_ticks = 0
+
+
+func addScore(value: int) -> void:
+	score += value
+	UI.set_score(score)
 
 func crop_velocity() -> void:
 	if vel.x > 0:
@@ -28,6 +39,7 @@ func add_impulse(vec: Vector2) -> void:
 	vel += vec
 	crop_velocity()
 
+
 func get_input():
 	var res = Vector2()
 	
@@ -36,8 +48,12 @@ func get_input():
 	#res.y = Input.get_action_strength("ui_up")-Input.get_action_strength("ui_down")
 	return res
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+func speed_up(ticks: int):
+	speed_ticks = ticks
+	UI.set_speed_time(speed_ticks)
+
 func _physics_process(delta: float) -> void:
+#	print(position)
 	if impulse_cooldown == 0:
 		vel.x = speed* get_input().x
 	elif impulse_cooldown == 25:
@@ -45,12 +61,13 @@ func _physics_process(delta: float) -> void:
 		vel.y /= 1.5
 	if impulse_cooldown != 0:
 		impulse_cooldown -= 1
+	crop_velocity()
+	if speed_ticks > 0:
+		vel.x *= 1.5
+		speed_ticks -= 1
+		UI.set_speed_time(speed_ticks)
 	
-	crop_velocity()	
 	vel = move_and_slide(vel, Vector2.UP)
-	
-	# move_and_slide(vel, Vector2.UP)
-	#vel.y += gravity * delta
 	
 	if is_on_floor():
 		impulse_cooldown = 0
@@ -64,11 +81,9 @@ func _physics_process(delta: float) -> void:
 			vel.y += gravity * delta
 		else:
 			vel.y = gravity*delta
-		#vel.y -= jumpPower # Higly disbalanced on slope-jumps
-	#else:
-	#	if vel.y < 0 and is_on_floor():
-	#		vel.y = gravity*delta
-				
+	
 	g_spr = get_node("Gun").sprite
 	spr.flip_h = !g_spr.flip_v
-	
+
+func _on_Gun_hit_something(object, damage) -> void:
+	emit_signal("bullet_hit_something", object, damage)
