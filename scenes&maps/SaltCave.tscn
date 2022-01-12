@@ -271,14 +271,14 @@ tile_data = PoolIntArray( -851947, 1, 0, -851912, 1, 0, -786420, 1, 0, -786412, 
 position = Vector2( 1507, 396 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 116, 156 )
+position = Vector2( 458, 131 )
 
 [node name="ConstManager" parent="." instance=ExtResource( 3 )]
 position = Vector2( 212, 274 )
 gravity = 100
-vel_max = 300
-jumpPower = 90
-speed = 95
+vel_max = 250
+jumpPower = 105
+speed = 100
 frict = 40
 
 [node name="TargetWaypoints" type="Node" parent="."]
